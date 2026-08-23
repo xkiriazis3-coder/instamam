@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insta.mam — Meze Bar στα Λαγκαδίκια Θεσσαλονίκης</title>
-<meta name="description" content="Insta.mam Meze Bar στα Λαγκαδίκια. Καφές από το πρωί, μεζέδες, cocktails και ποτό μέχρι αργά. Τηλέφωνο 23930 23176.">
+<title>Insta.mam — Μεζεδοπωλείο &amp; Meze Bar, Λαγκαδίκια Θεσσαλονίκης</title>
+<meta name="description" content="Meze bar και μεζεδοπωλείο στα Λαγκαδίκια Θεσσαλονίκης. Καφές από το πρωί, μεζέδες, cocktails και ποτό μέχρι αργά. Κρατήσεις: 23930 23176.">
 
 <link rel="canonical" href="https://instamam.gr/">
 <link rel="alternate" hreflang="el" href="https://instamam.gr/">
@@ -17,8 +17,13 @@
 <meta property="og:title" content="Insta.mam — Meze Bar στα Λαγκαδίκια">
 <meta property="og:description" content="Καφές από το πρωί, μεζέδες και ποτό μέχρι αργά.">
 <meta property="og:url" content="https://instamam.gr/">
-<meta property="og:image" content="https://instamam.gr/assets/img/interior-1.jpg">
+<meta property="og:image" content="https://instamam.gr/assets/img/og-image.jpg">
+<meta property="og:site_name" content="Insta.mam Meze Bar">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ο χώρος του Insta.mam Meze Bar στα Λαγκαδίκια">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Ο χώρος του Insta.mam Meze Bar στα Λαγκαδίκια">
 <meta name="theme-color" content="#0F1623">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,33 +31,70 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@200..800&amp;family=GFS+Didot&amp;display=swap">
 <link rel="stylesheet" href="assets/css/style.css?v=2026082404">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
-<!-- Local SEO. For a venue outside the city this block does real work:
-     it is what puts hours, phone and location into Google's side panel.
-     ⟨ ⟩ marks values still awaiting confirmation. -->
+<!-- Structured data. For a venue outside the city this block does more
+     commercial work than any section on the page: it is what fills Google's
+     side panel with phone, hours and location.
+
+     TODO when the real details arrive — add to the object below:
+       "streetAddress" and "postalCode" inside "address"
+       "geo": { "@type": "GeoCoordinates", "latitude": .., "longitude": .. }
+       "openingHoursSpecification": [ ... ]  (see assets/data/hours.json)
+     Do NOT put placeholder text in here. Search engines index it literally. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Restaurant",
+  "@id": "https://instamam.gr/#restaurant",
   "name": "Insta.mam Meze Bar",
-  "servesCuisine": ["Greek", "Meze"],
+  "alternateName": "Insta.mam",
+  "description": "Meze bar στα Λαγκαδίκια Θεσσαλονίκης. Καφές από το πρωί, μεζέδες, cocktails και ποτό μέχρι αργά.",
+  "servesCuisine": [
+    "Greek",
+    "Meze",
+    "Mediterranean"
+  ],
   "telephone": "+302393023176",
   "url": "https://instamam.gr/",
-  "image": "https://instamam.gr/assets/img/interior-1.jpg",
+  "image": [
+    "https://instamam.gr/assets/img/og-image.jpg"
+  ],
+  "logo": "https://instamam.gr/assets/img/logo.png",
   "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Credit Card",
+  "inLanguage": [
+    "el",
+    "en"
+  ],
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "⟨ΟΔΟΣ ΚΑΙ ΑΡΙΘΜΟΣ⟩",
     "addressLocality": "Λαγκαδίκια",
     "addressRegion": "Θεσσαλονίκη",
-    "postalCode": "⟨ΤΚ⟩",
     "addressCountry": "GR"
   },
+  "areaServed": [
+    {
+      "@type": "Place",
+      "name": "Λαγκαδίκια"
+    },
+    {
+      "@type": "Place",
+      "name": "Λαγκαδάς"
+    },
+    {
+      "@type": "Place",
+      "name": "Θεσσαλονίκη"
+    }
+  ],
+  "hasMenu": "https://instamam.gr/#menu",
+  "acceptsReservations": "True",
   "sameAs": [
     "https://www.instagram.com/instamam_mezebar",
     "https://www.facebook.com/profile.php?id=100087998074640"
-  ],
-  "acceptsReservations": "True"
+  ]
 }
 </script>
 </head>

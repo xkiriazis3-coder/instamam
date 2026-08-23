@@ -1,0 +1,8 @@
+# Insta.mam Meze Bar — Λαγκαδίκια, Θεσσαλονίκη
+User-agent: *
+Allow: /
+
+# The menu editor is a private tool, not content.
+Disallow: /admin/
+
+Sitemap: https://instamam.gr/sitemap.xml

@@ -1,0 +1,14 @@
+{
+  "name": "Insta.mam Meze Bar",
+  "short_name": "Insta.mam",
+  "description": "Meze bar στα Λαγκαδίκια Θεσσαλονίκης.",
+  "lang": "el",
+  "start_url": "/",
+  "display": "browser",
+  "theme_color": "#0F1623",
+  "background_color": "#0F1623",
+  "icons": [
+    { "src": "/assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
