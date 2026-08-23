@@ -1,0 +1,76 @@
+{
+  "_comment": "Edited with admin/menu-editor.html — no need to touch this by hand. 'price' is a plain string so you can write 4,50 or 4.50 or leave it empty.",
+  "updated": "2026-08-23",
+  "categories": [
+    {
+      "id": "meze",
+      "el": "Μεζέδες",
+      "en": "Meze",
+      "items": [
+        { "el": "Τζατζίκι", "en": "Tzatziki", "dEl": "Στραγγιστό γιαούρτι, αγγούρι, σκόρδο", "dEn": "Strained yoghurt, cucumber, garlic", "price": "" },
+        { "el": "Τυροκαυτερή", "en": "Tirokafteri", "dEl": "Φέτα, πιπεριά Φλωρίνης, καυτερή", "dEn": "Feta, Florina pepper, chilli", "price": "" },
+        { "el": "Ταραμοσαλάτα", "en": "Taramosalata", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Κεφτεδάκια", "en": "Meatballs", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Λουκάνικο χωριάτικο", "en": "Village sausage", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Φέτα ψητή", "en": "Baked feta", "dEl": "Με μέλι και σουσάμι", "dEn": "With honey and sesame", "price": "" },
+        { "el": "Χταπόδι ξιδάτο", "en": "Octopus in vinegar", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Τηγανιά χοιρινή", "en": "Pork tiganiá", "dEl": "", "dEn": "", "price": "" }
+      ]
+    },
+    {
+      "id": "salad",
+      "el": "Σαλάτες",
+      "en": "Salads",
+      "items": [
+        { "el": "Χωριάτικη", "en": "Greek salad", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Ντάκος", "en": "Dakos", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Πράσινη σαλάτα", "en": "Green salad", "dEl": "", "dEn": "", "price": "" }
+      ]
+    },
+    {
+      "id": "grill",
+      "el": "Στη σχάρα",
+      "en": "From the grill",
+      "items": [
+        { "el": "Μπιφτέκι", "en": "Beef patty", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Χοιρινή μπριζόλα", "en": "Pork chop", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Κοτόπουλο σχάρας", "en": "Grilled chicken", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Παϊδάκια", "en": "Lamb chops", "dEl": "", "dEn": "", "price": "" }
+      ]
+    },
+    {
+      "id": "coffee",
+      "el": "Καφές",
+      "en": "Coffee",
+      "items": [
+        { "el": "Espresso", "en": "Espresso", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Freddo espresso", "en": "Freddo espresso", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Freddo cappuccino", "en": "Freddo cappuccino", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Ελληνικός", "en": "Greek coffee", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Καφές φίλτρου", "en": "Filter coffee", "dEl": "", "dEn": "", "price": "" }
+      ]
+    },
+    {
+      "id": "cocktails",
+      "el": "Cocktails",
+      "en": "Cocktails",
+      "items": [
+        { "el": "Aperol Spritz", "en": "Aperol Spritz", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Negroni", "en": "Negroni", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Mojito", "en": "Mojito", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Espresso Martini", "en": "Espresso Martini", "dEl": "", "dEn": "", "price": "" }
+      ]
+    },
+    {
+      "id": "drinks",
+      "el": "Ποτά & κρασί",
+      "en": "Spirits & wine",
+      "items": [
+        { "el": "Ούζο", "en": "Ouzo", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Τσίπουρο", "en": "Tsipouro", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Κρασί ποτήρι", "en": "Wine by the glass", "dEl": "", "dEn": "", "price": "" },
+        { "el": "Μπύρα", "en": "Beer", "dEl": "", "dEn": "", "price": "" }
+      ]
+    }
+  ]
+}

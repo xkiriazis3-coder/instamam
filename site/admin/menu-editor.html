@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Επεξεργασία μενού — Insta.mam</title>
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@200..800&amp;family=GFS+Didot&amp;display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+
+:root{
+  --bg:#0F1623; --bg-deep:#0A0F19; --surface:#161E2E; --surface-hi:#1D273A;
+  --text:#F4F6FA; --muted:#AEB6C4; --muted-dim:#8E97A8;
+  --red:#D9243C; --red-deep:#C0182E; --red-text:#F06A7E;
+  --oak:#C79A6B; --oak-hi:#D9B48A;
+  --line:#232E42; --line-strong:#5A6B85;
+  --ok:#7FBF8A;
+  --r:3px;
+}
+*,*::before,*::after{box-sizing:border-box} *{margin:0}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Commissioner',system-ui,sans-serif; font-size:16px; font-weight:350;
+  line-height:1.6; -webkit-font-smoothing:antialiased; padding-bottom:120px;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--oak); outline-offset:2px; border-radius:2px}
+
+.wrap{max-width:1080px;margin-inline:auto;padding:0 20px}
+@media(min-width:768px){.wrap{padding:0 32px}}
+
+header.top{
+  border-bottom:1px solid var(--line); background:var(--bg-deep);
+  padding:24px 0; margin-bottom:32px;
+}
+h1{font-family:'GFS Didot',serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:400;line-height:1.2}
+.sub{color:var(--muted-dim);font-size:.875rem;margin-top:6px}
+
+.help{
+  background:var(--surface); border:1px solid var(--line); border-left:2px solid var(--oak);
+  border-radius:var(--r); padding:16px 20px; margin-bottom:28px; color:var(--muted); font-size:.9rem;
+}
+.help b{color:var(--text)}
+.help ol{margin:8px 0 0; padding-left:20px}
+.help li{margin-bottom:4px}
+
+/* ---- category ---- */
+.cat{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:5px; margin-bottom:20px; overflow:hidden;
+}
+.cat__head{
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  padding:14px 16px; background:var(--surface-hi); border-bottom:1px solid var(--line);
+}
+.cat__head input{
+  background:var(--bg); border:1px solid var(--line-strong); border-radius:var(--r);
+  padding:9px 12px; min-height:42px; min-width:0; flex:1 1 160px;
+}
+.cat__head .lbl{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--oak);flex:none}
+.cat__body{padding:8px 16px 16px}
+
+/* ---- dish rows ---- */
+.row{
+  display:grid; gap:8px; padding:12px 0; border-bottom:1px solid var(--line);
+  grid-template-columns:1fr;
+}
+@media(min-width:820px){
+  .row{grid-template-columns:1.1fr 1.1fr 1.4fr 1.4fr 110px auto; align-items:start}
+}
+.row:last-child{border-bottom:none}
+.row input{
+  width:100%; background:var(--bg); border:1px solid var(--line-strong);
+  border-radius:var(--r); padding:9px 11px; min-height:44px;
+}
+.row input::placeholder{color:var(--muted-dim)}
+.row input.price{text-align:right;font-variant-numeric:tabular-nums}
+.row .fieldlabel{display:block;font-size:.7rem;color:var(--muted-dim);margin-bottom:3px}
+@media(min-width:820px){ .row .fieldlabel{display:none} }
+
+button{cursor:pointer;border-radius:var(--r);transition:background .18s,border-color .18s,color .18s}
+.btn{
+  min-height:44px; padding:0 18px; background:transparent; color:var(--text);
+  border:1px solid var(--line-strong); font-size:.8rem; font-weight:500;
+  letter-spacing:.05em; text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:8px;justify-content:center;
+}
+.btn:hover{background:var(--surface-hi);border-color:var(--oak);color:var(--oak-hi)}
+.btn--primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn--primary:hover{background:var(--red-deep);border-color:var(--red-deep);color:#fff}
+.btn--sm{min-height:38px;padding:0 12px;font-size:.72rem}
+.icon-btn{
+  width:44px;height:44px;background:transparent;border:1px solid var(--line-strong);
+  color:var(--muted);display:grid;place-items:center;flex:none;
+}
+.icon-btn:hover{border-color:var(--red);color:var(--red-text);background:rgba(217,36,60,.08)}
+
+.cat__actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.addcat{margin:8px 0 32px}
+
+/* ---- sticky save bar ---- */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:rgba(10,15,25,.96); backdrop-filter:blur(12px);
+  border-top:1px solid var(--line); padding:14px 0;
+}
+.bar__in{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.status{font-size:.85rem;color:var(--muted-dim)}
+.status[data-s="ok"]{color:var(--ok)}
+.status[data-s="warn"]{color:var(--oak-hi)}
+.bar__btns{display:flex;flex-wrap:wrap;gap:10px}
+
+dialog{
+  border:1px solid var(--line-strong); border-radius:6px; background:var(--surface);
+  color:var(--text); padding:0; max-width:min(760px,92vw); width:100%;
+}
+dialog::backdrop{background:rgba(6,9,15,.8)}
+.dlg__head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.dlg__body{padding:22px}
+textarea#out{
+  width:100%;height:46vh;background:var(--bg);color:var(--text);
+  border:1px solid var(--line-strong);border-radius:var(--r);padding:12px;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;line-height:1.5;resize:vertical;
+}
+.dlg__foot{padding:0 22px 22px;display:flex;flex-wrap:wrap;gap:10px}
+.hint{color:var(--muted-dim);font-size:.82rem;margin-bottom:12px}
+.hint b{color:var(--oak-hi)}
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1>Επεξεργασία μενού</h1>
+    <p class="sub">Insta.mam Meze Bar · άλλαξε πιάτα και τιμές χωρίς να πειράξεις κώδικα</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="help">
+    <b>Πώς δουλεύει</b>
+    <ol>
+      <li>Άλλαξε ό,τι θέλεις παρακάτω. Το ελληνικό και το αγγλικό όνομα μπαίνουν δίπλα-δίπλα.</li>
+      <li>Πάτα <b>Αποθήκευση αρχείου</b> κάτω δεξιά — κατεβαίνει ένα αρχείο <b>menu.json</b>.</li>
+      <li>Ανέβασέ το στον φάκελο <b>assets/data/</b> και αντικατέστησε το παλιό. Τέλος.</li>
+    </ol>
+    <p style="margin-top:10px">Άφησε την τιμή κενή αν δεν θέλεις να φαίνεται — θα δείξει παύλα.</p>
+  </div>
+
+  <div id="cats" aria-live="polite"></div>
+
+  <div class="addcat">
+    <button class="btn" type="button" id="add-cat">+ Νέα κατηγορία</button>
+  </div>
+
+</div>
+
+<div class="bar">
+  <div class="wrap bar__in">
+    <p class="status" id="status">Φόρτωση…</p>
+    <div class="bar__btns">
+      <button class="btn" type="button" id="preview">Δες το JSON</button>
+      <button class="btn btn--primary" type="button" id="save">Αποθήκευση αρχείου</button>
+    </div>
+  </div>
+</div>
+
+<dialog id="dlg">
+  <div class="dlg__head">
+    <strong>menu.json</strong>
+    <button class="btn btn--sm" type="button" id="dlg-close">Κλείσιμο</button>
+  </div>
+  <div class="dlg__body">
+    <p class="hint">Αν το κατέβασμα δεν δουλέψει, διάλεξε όλο το κείμενο, αντίγραψέ το και επικόλλησέ το στο <b>assets/data/menu.json</b>.</p>
+    <label class="sr" for="out">Περιεχόμενο αρχείου menu.json</label>
+    <textarea id="out" spellcheck="false" readonly></textarea>
+  </div>
+  <div class="dlg__foot">
+    <button class="btn btn--primary" type="button" id="copy">Αντιγραφή</button>
+    <button class="btn" type="button" id="dl">Κατέβασμα</button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  'use strict';
+  var SRC = '../assets/data/menu.json';
+  var data = { updated:'', categories: [] };
+  var elCats = document.getElementById('cats');
+  var elStatus = document.getElementById('status');
+  var dirty = false;
+
+  function setStatus(msg, s){ elStatus.textContent = msg; if(s) elStatus.setAttribute('data-s',s); else elStatus.removeAttribute('data-s'); }
+  function mark(){ dirty = true; setStatus('Έχεις αλλαγές που δεν έχεις αποθηκεύσει.', 'warn'); }
+  function slug(s){
+    return (s||'cat').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || ('cat'+Date.now());
+  }
+  function esc(s){ return String(s==null?'':s); }
+
+  function svgTrash(){
+    return '<svg width="17" height="17" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16ZM96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0Zm48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0Z"/></svg>';
+  }
+
+  function render(){
+    elCats.innerHTML = '';
+    data.categories.forEach(function(cat, ci){
+      var box = document.createElement('section');
+      box.className = 'cat';
+
+      var head = document.createElement('div');
+      head.className = 'cat__head';
+      head.innerHTML =
+        '<span class="lbl">Κατηγορία</span>' +
+        '<input aria-label="Όνομα κατηγορίας στα ελληνικά" placeholder="Ελληνικά" value="'+ esc(cat.el).replace(/"/g,'&quot;') +'" data-k="el">' +
+        '<input aria-label="Όνομα κατηγορίας στα αγγλικά" placeholder="English" value="'+ esc(cat.en).replace(/"/g,'&quot;') +'" data-k="en">';
+
+      var del = document.createElement('button');
+      del.className = 'icon-btn'; del.type = 'button';
+      del.setAttribute('aria-label', 'Διαγραφή κατηγορίας ' + esc(cat.el));
+      del.innerHTML = svgTrash();
+      del.addEventListener('click', function(){
+        if(!confirm('Να διαγραφεί η κατηγορία «'+ (cat.el||'') +'» με όλα τα πιάτα της;')) return;
+        data.categories.splice(ci,1); mark(); render();
+      });
+      head.appendChild(del);
+
+      head.querySelectorAll('input[data-k]').forEach(function(inp){
+        inp.addEventListener('input', function(){
+          cat[inp.getAttribute('data-k')] = inp.value;
+          if(inp.getAttribute('data-k')==='el') cat.id = slug(inp.value);
+          mark();
+        });
+      });
+
+      var body = document.createElement('div');
+      body.className = 'cat__body';
+
+      (cat.items||[]).forEach(function(item, ii){
+        body.appendChild(rowFor(cat, item, ii));
+      });
+
+      var acts = document.createElement('div');
+      acts.className = 'cat__actions';
+      var addBtn = document.createElement('button');
+      addBtn.className = 'btn btn--sm'; addBtn.type='button'; addBtn.textContent = '+ Πιάτο';
+      addBtn.addEventListener('click', function(){
+        cat.items = cat.items || [];
+        cat.items.push({el:'',en:'',dEl:'',dEn:'',price:''});
+        mark(); render();
+        var rows = elCats.querySelectorAll('.cat')[ci].querySelectorAll('.row input');
+        if(rows.length) rows[rows.length-6] && rows[rows.length-6].focus();
+      });
+      acts.appendChild(addBtn);
+      body.appendChild(acts);
+
+      box.appendChild(head); box.appendChild(body);
+      elCats.appendChild(box);
+    });
+  }
+
+  function rowFor(cat, item, ii){
+    var row = document.createElement('div');
+    row.className = 'row';
+    var fields = [
+      ['el',    'Πιάτο (ελληνικά)',   'Τζατζίκι'],
+      ['en',    'Dish (English)',     'Tzatziki'],
+      ['dEl',   'Περιγραφή (ελλ.)',   'προαιρετικό'],
+      ['dEn',   'Description (EN)',   'optional'],
+      ['price', 'Τιμή',               '4,50']
+    ];
+    fields.forEach(function(f){
+      var k = f[0], label = f[1], ph = f[2];
+      var w = document.createElement('div');
+      var id = 'f-'+cat.id+'-'+ii+'-'+k;
+      var lab = document.createElement('label');
+      lab.className='fieldlabel'; lab.setAttribute('for', id); lab.textContent = label;
+      var inp = document.createElement('input');
+      inp.id = id; inp.value = esc(item[k]); inp.placeholder = ph;
+      inp.setAttribute('aria-label', label);
+      if(k==='price'){ inp.className='price'; inp.inputMode='decimal'; }
+      inp.addEventListener('input', function(){ item[k] = inp.value; mark(); });
+      w.appendChild(lab); w.appendChild(inp);
+      row.appendChild(w);
+    });
+    var del = document.createElement('button');
+    del.className='icon-btn'; del.type='button';
+    del.setAttribute('aria-label','Διαγραφή πιάτου '+(item.el||''));
+    del.innerHTML = svgTrash();
+    del.addEventListener('click', function(){
+      cat.items.splice(ii,1); mark(); render();
+    });
+    row.appendChild(del);
+    return row;
+  }
+
+  function output(){
+    var clean = {
+      _comment: 'Edited with admin/menu-editor.html',
+      updated: new Date().toISOString().slice(0,10),
+      categories: data.categories.map(function(c){
+        return {
+          id: c.id || slug(c.el),
+          el: (c.el||'').trim(),
+          en: (c.en||'').trim(),
+          items: (c.items||[])
+            .filter(function(i){ return (i.el||'').trim() || (i.en||'').trim(); })
+            .map(function(i){
+              return { el:(i.el||'').trim(), en:(i.en||'').trim(),
+                       dEl:(i.dEl||'').trim(), dEn:(i.dEn||'').trim(),
+                       price:(i.price||'').trim() };
+            })
+        };
+      }).filter(function(c){ return c.el || c.en; })
+    };
+    return JSON.stringify(clean, null, 2) + '\n';
+  }
+
+  // ---- actions ----
+  document.getElementById('add-cat').addEventListener('click', function(){
+    data.categories.push({ id:'cat'+Date.now(), el:'Νέα κατηγορία', en:'New category', items:[{el:'',en:'',dEl:'',dEn:'',price:''}] });
+    mark(); render();
+    window.scrollTo({ top: document.body.scrollHeight, behavior:'smooth' });
+  });
+
+  var dlg = document.getElementById('dlg');
+  var out = document.getElementById('out');
+
+  function openDlg(){ out.value = output(); dlg.showModal(); }
+  document.getElementById('preview').addEventListener('click', openDlg);
+  document.getElementById('dlg-close').addEventListener('click', function(){ dlg.close(); });
+
+  document.getElementById('copy').addEventListener('click', function(){
+    out.select();
+    navigator.clipboard.writeText(out.value).then(function(){
+      setStatus('Αντιγράφηκε. Επικόλλησέ το στο assets/data/menu.json', 'ok');
+      dirty = false;
+    }).catch(function(){
+      document.execCommand('copy');
+      setStatus('Αντιγράφηκε.', 'ok');
+    });
+  });
+
+  function download(){
+    var blob = new Blob([output()], {type:'application/json'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'menu.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    dirty = false;
+    setStatus('Κατέβηκε το menu.json — ανέβασέ το στο assets/data/', 'ok');
+  }
+  document.getElementById('save').addEventListener('click', download);
+  document.getElementById('dl').addEventListener('click', download);
+
+  window.addEventListener('beforeunload', function(e){
+    if(dirty){ e.preventDefault(); e.returnValue = ''; }
+  });
+
+  // ---- load ----
+  fetch(SRC)
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(j){
+      data = j; data.categories = data.categories || [];
+      render();
+      var n = data.categories.reduce(function(a,c){ return a + (c.items?c.items.length:0); }, 0);
+      setStatus(data.categories.length + ' κατηγορίες · ' + n + ' πιάτα');
+    })
+    .catch(function(){
+      setStatus('Δεν βρέθηκε το menu.json. Ξεκίνα από το μηδέν.', 'warn');
+      data = { categories: [] }; render();
+    });
+})();
+</script>
+</body>
+</html>

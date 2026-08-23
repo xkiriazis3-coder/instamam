@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="PHOTO 2">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#18202F"/><stop offset="0.55" stop-color="#111826"/><stop offset="1" stop-color="#0C121C"/>
+    </linearGradient>
+    <pattern id="p" width="46" height="46" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <line x1="0" y1="0" x2="0" y2="46" stroke="#C79A6B" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="600" fill="url(#g)"/>
+  <rect width="600" height="600" fill="url(#p)"/>
+  <g fill="none" stroke="#C79A6B" stroke-opacity="0.28">
+    <rect x="18" y="18" width="564" height="564" rx="3"/>
+  </g>
+  <text x="50%" y="49%" text-anchor="middle" font-family="Georgia,serif" font-size="36"
+        fill="#C79A6B" fill-opacity="0.75" letter-spacing="2">Insta.mam</text>
+  <text x="50%" y="49%" dy="33" text-anchor="middle" font-family="Helvetica,Arial,sans-serif"
+        font-size="18" fill="#8E97A8" letter-spacing="4">PHOTO 2</text>
+</svg>
