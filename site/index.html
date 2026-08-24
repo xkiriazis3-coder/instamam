@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@200..800&amp;family=GFS+Didot&amp;display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=2026082404">
+<link rel="stylesheet" href="assets/css/style.css?v=2026082406">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -177,7 +177,7 @@
 <section class="section" id="steki" aria-labelledby="steki-title">
   <div class="container">
     <div class="story__grid">
-      <div data-reveal>
+      <div class="story__copy" data-reveal>
         <p class="eyebrow">Το στέκι</p>
         <h2 id="steki-title" data-words>Ένα meze bar που δουλεύει όλη μέρα</h2>
         <p class="lead">
@@ -194,18 +194,32 @@
           και τα τραπέζια είναι στημένα για παρέες — όχι για φαγητό στα γρήγορα.
         </p>
 
-        <dl class="facts">
-          <div><dt>Καφές</dt><dd>Από νωρίς</dd></div>
-          <div><dt>Κουζίνα</dt><dd>Μεζέδες</dd></div>
-          <div><dt>Μπαρ</dt><dd>Μέχρι αργά</dd></div>
-        </dl>
       </div>
 
       <figure class="story__figure" data-reveal>
-        <img src="assets/img/story.svg" alt="Ο χώρος του Insta.mam — μπαρ και τραπέζια"
-             width="900" height="1125" loading="lazy" decoding="async">
+        <img src="assets/img/interior-1-1000.webp" alt="Ο χώρος του Insta.mam — μπαρ και τραπέζια"
+             width="1000" height="1250" loading="lazy" decoding="async">
       </figure>
     </div>
+
+    <ol class="dayarc" aria-label="Η μέρα στο Insta.mam">
+    <li class="dayarc__step">
+    <span class="dayarc__when">Πρωί</span>
+    <span class="dayarc__what">Καφές</span>
+    </li>
+    <li class="dayarc__step">
+    <span class="dayarc__when">Μεσημέρι</span>
+    <span class="dayarc__what">Μεζέδες</span>
+    </li>
+    <li class="dayarc__step">
+    <span class="dayarc__when">Βράδυ</span>
+    <span class="dayarc__what">Κουζίνα &amp; cocktails</span>
+    </li>
+    <li class="dayarc__step">
+    <span class="dayarc__when">Αργά</span>
+    <span class="dayarc__what">Ποτό και παρέα</span>
+    </li>
+    </ol>
   </div>
 </section>
 
@@ -531,8 +545,8 @@
   };
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-<script src="assets/js/main.js?v=2026082404" defer></script>
-<script src="assets/js/atmosphere.js?v=2026082404" defer></script>
+<script src="assets/js/main.js?v=2026082406" defer></script>
+<script src="assets/js/atmosphere.js?v=2026082406" defer></script>
 <!-- Mobile action bar: on a phone the two things people actually want are
      "call them" and "book a table". Not a shrunken desktop header. -->
 <div class="actionbar" aria-label="Γρήγορες ενέργειες">

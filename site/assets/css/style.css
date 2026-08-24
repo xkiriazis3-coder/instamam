@@ -479,13 +479,74 @@ p { max-width: 68ch; }
 @media (min-width: 900px) {
   .story__grid { grid-template-columns: 1fr 1fr; gap: var(--s9); }
 }
-.story__copy p + p { margin-top: var(--s4); }
+.story__copy p + p { margin-top: var(--s5); }
 .story__copy .lead { margin-bottom: var(--s5); }
+/* The lead sets the section up; the body that follows is quieter so the
+   eye has somewhere to rest rather than meeting one uniform block. */
+.story__copy p:not(.lead) { color: var(--muted); }
 
 .story__figure { position: relative; }
 .story__figure img {
-  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  /* Taller and narrower than the source photo, so `cover` crops horizontally
+     and this reads as a tall slice of the bottle shelves rather than a second
+     printing of the hero image. */
+  width: 100%; aspect-ratio: 3 / 4.4; object-fit: cover;
+  object-position: 76% center;
   border-radius: var(--radius-card);
+  filter: contrast(1.05) saturate(0.94);
+}
+
+/* ==========================================================================
+   DAY ARC — the whole premise of the place in one line:
+   coffee in the morning, drinks at two in the morning. The rail is the same
+   warm→cool journey the page background makes as you scroll.
+   ========================================================================== */
+/* Full section width, not tucked into the text column — this line is the
+   premise of the business, so it gets to be a feature rather than a footnote. */
+.dayarc {
+  list-style: none; padding: var(--s8) 0 0; margin: var(--s9) 0 0;
+  border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: var(--s7) var(--s5);
+  position: relative;
+}
+@media (min-width: 700px) { .dayarc { grid-template-columns: repeat(4, 1fr); gap: var(--s6); } }
+
+.dayarc__step { position: relative; padding-top: var(--s5); }
+/* the rail */
+.dayarc__step::before {
+  content: ''; position: absolute; top: 5px; left: 0; right: 0; height: 1px;
+  background: var(--line-strong); opacity: 0.5;
+}
+.dayarc__step:first-child::before { left: 5px; }
+.dayarc__step:last-child::before  { right: calc(100% - 6px); }
+@media (max-width: 699px) {
+  .dayarc__step:nth-child(2)::before { right: calc(100% - 6px); }
+  .dayarc__step:nth-child(3)::before { left: 5px; }
+}
+/* the marker — warms to cool across the four steps */
+.dayarc__step::after {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--bg); border: 1px solid currentColor;
+}
+.dayarc__step:nth-child(1) { color: #D9B48A; }
+.dayarc__step:nth-child(2) { color: #C79A6B; }
+.dayarc__step:nth-child(3) { color: #B07E63; }
+.dayarc__step:nth-child(4) { color: #8E97A8; }
+.dayarc__step:nth-child(4)::after { background: currentColor; }
+
+.dayarc__when {
+  display: block;
+  font-size: var(--fs-eyebrow); letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 600; color: currentColor;
+  margin-bottom: var(--s2);
+}
+.dayarc__what {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.1vw, 1.5rem);
+  line-height: 1.15; color: var(--text);
 }
 .story__figure::after {
   content: ''; position: absolute; inset: auto -14px -14px auto;
