@@ -75,6 +75,10 @@
 @media (min-width: 768px) { :root { --gutter: 32px; --header-h: 76px; } }
 @media (min-width: 1024px){ :root { --gutter: 48px; } }
 
+/* Small-phone overrides live at the END of this file — see "SMALL PHONES".
+   A media query adds no specificity, so placing them here would lose to the
+   component rules defined further down. */
+
 /* ==========================================================================
    RESET
    ========================================================================== */
@@ -1248,3 +1252,37 @@ p { max-width: 68ch; }
   clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
 }
 .no-scroll { overflow: hidden; }
+
+/* ==========================================================================
+   SMALL PHONES (320–380px: iPhone SE, older Android)
+   Must be last in the file. A media query carries no extra specificity, so
+   these have to come AFTER the component rules they override.
+
+   At 320px the header row measured 363px against a 320px viewport. Because
+   body has overflow-x:hidden it was clipped rather than scrolled, and the
+   menu button lost 23 of its 44px off the right edge — half the navigation
+   control was unreachable on the smallest common phone.
+   ========================================================================== */
+@media (max-width: 380px) {
+  .brand__mark    { height: 26px; }
+  .header__inner  { gap: var(--s2); }
+  .header__actions{ gap: var(--s2); }
+  .lang a         { min-width: 40px; }   /* height stays 44px for touch */
+  .hero__cta .btn { width: 100%; }       /* stacked CTAs read as one column */
+}
+
+/* ==========================================================================
+   SHORT VIEWPORTS (landscape phone)
+   At 844×390 the hero measured 512px tall — 160px of that was padding, so
+   the CTAs fell below the fold on a screen only 390px high. Tighten the
+   vertical rhythm when height is scarce but width is not.
+   ========================================================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero__inner   { padding-block: var(--s6) var(--s5); }
+  .hero__wordmark{ font-size: clamp(2rem, 6.5vw, 3.25rem); }
+  .hero__tag     { margin-bottom: var(--s5); font-size: 1.0625rem; }
+  .hero__sub     { margin-bottom: var(--s4); }
+  .hero__status  { margin-bottom: var(--s4); }
+  .hero__scroll  { display: none; }   /* no room, and nothing to point at */
+  .section       { padding-block: var(--s8); }
+}

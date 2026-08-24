@@ -425,6 +425,15 @@
     box.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1, 1); }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1, -1); }
+      else if (e.key === 'Escape') {
+        // Escape is handled explicitly rather than left to the dialog's native
+        // close-watcher. Verified: opening via startViewTransition() stops the
+        // watcher being registered — the keydown arrived with defaultPrevented
+        // false, no `cancel` event fired, and the dialog stayed open. That
+        // leaves a keyboard user with no way out of the viewer.
+        e.preventDefault();
+        closeMorph();
+      }
     });
 
     // swipe, since this is mostly a phone experience
