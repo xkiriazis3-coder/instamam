@@ -8,10 +8,67 @@
 (function () {
   'use strict';
 
+  /* ------------------------------------------------------------------------
+     0. Strings, and the small jobs that used to be inline <script> blocks.
+
+     These lived in the HTML until the CSP work. Every inline script or
+     on* attribute forces `script-src 'unsafe-inline'`, which defeats most of
+     the point of having a CSP at all — so they moved here and the policy is
+     now plain `script-src 'self'`.
+     ------------------------------------------------------------------------ */
+  var LANG = document.documentElement.lang === 'en' ? 'en' : 'el';
+
+  var STRINGS = {
+    el: {
+      required: 'Το πεδίο είναι υποχρεωτικό',
+      invalid:  'Έλεγξε αυτό το πεδίο',
+      sending:  'Αποστολή…',
+      success:  'Το αίτημα στάλθηκε. Θα επικοινωνήσουμε μαζί σου για επιβεβαίωση.',
+      failure:  'Δεν στάλθηκε. Πάρε μας τηλέφωνο στο 23930 23176.',
+      noEndpoint: 'Η φόρμα δεν έχει συνδεθεί ακόμη. Πάρε μας στο 23930 23176.',
+      menuFail: 'Ο κατάλογος δεν φόρτωσε. Πάρε μας στο 23930 23176.',
+      menuCats: 'Κατηγορίες μενού',
+      openNow: 'Ανοιχτά τώρα', closedNow: 'Κλειστά',
+      until: 'μέχρι', opensAt: 'ανοίγουμε'
+    },
+    en: {
+      required: 'This field is required',
+      invalid:  'Please check this field',
+      sending:  'Sending…',
+      success:  'Request sent. We will contact you to confirm.',
+      failure:  'Could not send. Please call us on +30 23930 23176.',
+      noEndpoint: 'The form is not connected yet. Please call +30 23930 23176.',
+      menuFail: 'The menu did not load. Please call +30 23930 23176.',
+      menuCats: 'Menu categories',
+      openNow: 'Open now', closedNow: 'Closed',
+      until: 'until', opensAt: 'opens'
+    }
+  };
+  window.INSTAMAM_I18N = STRINGS[LANG];
+
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function $(sel, ctx) { return (ctx || document).querySelector(sel); }
   function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+  /* Copyright year — was an inline script. */
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* Logo fallback — was an inline onerror="" attribute. If the mark fails to
+     load, hide it and reveal the typographic wordmark instead. `complete` with
+     zero naturalWidth means it already failed before this script ran. */
+  (function () {
+    var mark = document.querySelector('.brand__mark');
+    if (!mark) return;
+    var fail = function () {
+      mark.style.display = 'none';
+      var alt = mark.nextElementSibling;
+      if (alt) alt.hidden = false;
+    };
+    if (mark.complete && mark.naturalWidth === 0) fail();
+    else mark.addEventListener('error', fail);
+  })();
 
   /* ------------------------------------------------------------------------
      1. Sticky header
@@ -485,12 +542,27 @@
   function initHeroWipe() {
     var el = $('[data-wipe]');
     if (!el || reduceMotion.matches) return;
-    var lines = el.innerHTML.split(/<br\s*\/?>/i);
+    var lines = el.innerHTML.split(/<br\s*\/?>/i)
+      .map(function (l) { return l.replace(/<[^>]*>/g, '').trim(); })
+      .filter(Boolean);
     if (!lines.length) return;
-    el.innerHTML = lines.map(function (line, i) {
-      return '<span class="wipe__line"><span class="wipe__inner" style="animation-delay:' +
-        (140 + i * 90) + 'ms">' + line.trim() + '</span></span>';
-    }).join('');
+
+    // DOM-built, not an innerHTML string: an HTML-parsed style="" is blocked
+    // by `style-src 'self'`, which would drop the per-line delay and make all
+    // lines wipe at once. CSSOM assignment is exempt from that restriction.
+    var frag = document.createDocumentFragment();
+    lines.forEach(function (line, i) {
+      var outer = document.createElement('span');
+      outer.className = 'wipe__line';
+      var inner = document.createElement('span');
+      inner.className = 'wipe__inner';
+      inner.textContent = line;
+      inner.style.animationDelay = (140 + i * 90) + 'ms';
+      outer.appendChild(inner);
+      frag.appendChild(outer);
+    });
+    el.textContent = '';
+    el.appendChild(frag);
   }
   initHeroWipe();
 

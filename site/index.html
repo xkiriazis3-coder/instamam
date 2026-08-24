@@ -26,10 +26,10 @@
 <meta name="twitter:image:alt" content="Ο χώρος του Insta.mam Meze Bar στα Λαγκαδίκια">
 <meta name="theme-color" content="#0F1623">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@200..800&amp;family=GFS+Didot&amp;display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=2026082410">
+<link rel="preload" href="/assets/fonts/commissioner-greek.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/gfs-didot-greek.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=1">
+<link rel="stylesheet" href="assets/css/style.css?v=2026082413">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -108,8 +108,7 @@
 <header class="header">
   <div class="container header__inner">
     <a class="brand" href="/" aria-label="Insta.mam Meze Bar — αρχική">
-      <img class="brand__mark" src="assets/img/logo.png" alt="Insta.mam Meze Bar"
-           onerror="this.style.display='none';this.nextElementSibling.hidden=false">
+      <img class="brand__mark" src="assets/img/logo.png" alt="Insta.mam Meze Bar">
       <span class="brand__text" hidden><b>Insta<i>.</i>mam</b></span>
     </a>
 
@@ -252,7 +251,7 @@
 <!-- ====================== GALLERY ====================== -->
 <section class="section" id="choros" aria-labelledby="choros-title">
   <div class="container">
-    <div data-reveal style="margin-bottom: var(--s7)">
+    <div class="section__head" data-reveal>
       <p class="eyebrow">Ο χώρος</p>
       <h2 id="choros-title" data-words>Μάρμαρο, ξύλο, χαμηλό φως</h2>
     </div>
@@ -322,7 +321,7 @@
 <!-- ====================== VISIT ====================== -->
 <section class="section section--sunk" id="visit" aria-labelledby="visit-title">
   <div class="container">
-    <div data-reveal style="margin-bottom: var(--s7)">
+    <div class="section__head" data-reveal>
       <p class="eyebrow">Πού θα μας βρεις</p>
       <h2 id="visit-title" data-words>Λαγκαδίκια, Θεσσαλονίκη</h2>
     </div>
@@ -374,7 +373,7 @@
 <!-- ====================== RESERVE ====================== -->
 <section class="section" id="reserve" aria-labelledby="reserve-title">
   <div class="container">
-    <div data-reveal style="margin-bottom: var(--s7)">
+    <div class="section__head" data-reveal>
       <p class="eyebrow">Κράτηση</p>
       <h2 id="reserve-title" data-words>Κράτησε τραπέζι</h2>
     </div>
@@ -446,6 +445,11 @@
           <span class="field__help" id="r-note-help">Γενέθλια, παιδικό καρεκλάκι, τραπέζι έξω — ό,τι θέλεις να ξέρουμε.</span>
         </div>
 
+        <p class="form__privacy">
+          Τα στοιχεία σου χρησιμοποιούνται μόνο για να κλείσουμε το τραπέζι και
+          διαγράφονται μετά. Δες την <a href="/privacy/">Πολιτική Απορρήτου</a>.
+          Προτιμάς να μη φύγουν από την ΕΕ; <a href="tel:+302393023176">Πάρε μας τηλέφωνο</a>.
+        </p>
         <button class="btn btn--primary" type="submit">Στείλε το αίτημα</button>
         <p class="form__status" role="status" aria-live="polite"></p>
       </form>
@@ -470,8 +474,8 @@
   <div class="container">
     <div class="footer__grid">
       <div>
-        <p class="brand__text" style="font-size:1.6rem"><b>Insta<i>.</i>mam</b></p>
-        <p style="color:var(--muted-dim);font-size:var(--fs-sm);margin-top:var(--s2)">Meze Bar · Λαγκαδίκια, Θεσσαλονίκη</p>
+        <p class="brand__text brand__text--footer"><b>Insta<i>.</i>mam</b></p>
+        <p class="footer__tag">Meze Bar · Λαγκαδίκια, Θεσσαλονίκη</p>
         <div class="socials">
           <a href="https://www.instagram.com/instamam_mezebar" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128 80a48 48 0 1 0 48 48 48.05 48.05 0 0 0-48-48Zm0 80a32 32 0 1 1 32-32 32 32 0 0 1-32 32Zm48-136H80a56.06 56.06 0 0 0-56 56v96a56.06 56.06 0 0 0 56 56h96a56.06 56.06 0 0 0 56-56V80a56.06 56.06 0 0 0-56-56Zm40 152a40 40 0 0 1-40 40H80a40 40 0 0 1-40-40V80a40 40 0 0 1 40-40h96a40 40 0 0 1 40 40Zm-24-96a12 12 0 1 1-12-12 12 12 0 0 1 12 12Z"/></svg>
@@ -498,8 +502,10 @@
         <h4>Επικοινωνία</h4>
         <ul>
           <li><a href="tel:+302393023176">23930 23176</a></li>
-          <li><span style="color:var(--muted-dim);font-size:var(--fs-sm)">⟨ΟΔΟΣ⟩, Λαγκαδίκια</span></li>
+          <li><span class="footer__muted">⟨ΟΔΟΣ⟩, Λαγκαδίκια</span></li>
           <li><a href="/en/" hreflang="en">English</a></li>
+          <li><a href="/privacy/">Πολιτική Απορρήτου</a></li>
+          <li><a href="/terms/">Στοιχεία επιχείρησης</a></li>
         </ul>
       </div>
     </div>
@@ -528,25 +534,8 @@
   </div>
 </dialog>
 
-<script>
-  window.INSTAMAM_I18N = {
-    required: 'Το πεδίο είναι υποχρεωτικό',
-    invalid:  'Έλεγξε αυτό το πεδίο',
-    sending:  'Αποστολή…',
-    success:  'Το αίτημα στάλθηκε. Θα επικοινωνήσουμε μαζί σου για επιβεβαίωση.',
-    failure:  'Δεν στάλθηκε. Πάρε μας τηλέφωνο στο 23930 23176.',
-    noEndpoint: 'Η φόρμα δεν έχει συνδεθεί ακόμη. Πάρε μας στο 23930 23176.',
-    menuFail: 'Ο κατάλογος δεν φόρτωσε. Πάρε μας στο 23930 23176.',
-    menuCats: 'Κατηγορίες μενού',
-    openNow: 'Ανοιχτά τώρα',
-    closedNow: 'Κλειστά',
-    until: 'μέχρι',
-    opensAt: 'ανοίγουμε'
-  };
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-<script src="assets/js/main.js?v=2026082410" defer></script>
-<script src="assets/js/atmosphere.js?v=2026082410" defer></script>
+<script src="assets/js/main.js?v=2026082413" defer></script>
+<script src="assets/js/atmosphere.js?v=2026082413" defer></script>
 <!-- Mobile action bar: on a phone the two things people actually want are
      "call them" and "book a table". Not a shrunken desktop header. -->
 <div class="actionbar" aria-label="Γρήγορες ενέργειες">

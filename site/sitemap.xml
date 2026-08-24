@@ -6,17 +6,37 @@
     <xhtml:link rel="alternate" hreflang="el" href="https://instamam.gr/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://instamam.gr/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://instamam.gr/"/>
-    <lastmod>2026-08-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-08-24</lastmod><changefreq>monthly</changefreq><priority>1.0</priority>
   </url>
   <url>
     <loc>https://instamam.gr/en/</loc>
     <xhtml:link rel="alternate" hreflang="el" href="https://instamam.gr/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://instamam.gr/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://instamam.gr/"/>
-    <lastmod>2026-08-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-08-24</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://instamam.gr/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="el" href="https://instamam.gr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://instamam.gr/en/privacy/"/>
+    <lastmod>2026-08-24</lastmod><changefreq>yearly</changefreq><priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://instamam.gr/en/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="el" href="https://instamam.gr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://instamam.gr/en/privacy/"/>
+    <lastmod>2026-08-24</lastmod><changefreq>yearly</changefreq><priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://instamam.gr/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="el" href="https://instamam.gr/terms/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://instamam.gr/en/terms/"/>
+    <lastmod>2026-08-24</lastmod><changefreq>yearly</changefreq><priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://instamam.gr/en/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="el" href="https://instamam.gr/terms/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://instamam.gr/en/terms/"/>
+    <lastmod>2026-08-24</lastmod><changefreq>yearly</changefreq><priority>0.3</priority>
   </url>
 </urlset>

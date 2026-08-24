@@ -1,0 +1,10 @@
+# The menu editor is an internal tool. It has no authentication, and on a
+# static host it cannot be given any. It never needs to be on the public
+# internet: it reads menu.json and hands back a file to download, which
+# works perfectly well opened from disk.
+site/admin
+
+# Source material and working notes are not part of the website.
+_source-images
+design-system
+site/content-guide.md

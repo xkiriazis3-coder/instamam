@@ -189,12 +189,28 @@
     if (reduce.matches || !('IntersectionObserver' in window)) return;
 
     heads.forEach(function (h) {
-      var words = h.textContent.trim().split(/\s+/);
+      var text = h.textContent.trim();
+      var words = text.split(/\s+/);
       if (words.length > 24) return;                 // don't shred long copy
-      h.setAttribute('aria-label', h.textContent.trim());
-      h.innerHTML = words.map(function (w, i) {
-        return '<span class="w"><i style="transition-delay:' + (i * 55) + 'ms">' + w + '</i></span>';
-      }).join(' ');
+      h.setAttribute('aria-label', text);
+
+      // Built with the DOM rather than an innerHTML string. A style="" written
+      // through HTML parsing is blocked by `style-src 'self'`, so the stagger
+      // would silently vanish under our CSP; assigning through CSSOM is not.
+      // It also means the heading text is never re-parsed as markup.
+      var frag = document.createDocumentFragment();
+      words.forEach(function (w, i) {
+        var outer = document.createElement('span');
+        outer.className = 'w';
+        var inner = document.createElement('i');
+        inner.textContent = w;
+        inner.style.transitionDelay = (i * 55) + 'ms';
+        outer.appendChild(inner);
+        frag.appendChild(outer);
+        if (i < words.length - 1) frag.appendChild(document.createTextNode(' '));
+      });
+      h.textContent = '';
+      h.appendChild(frag);
       h.classList.add('words-ready');
     });
 

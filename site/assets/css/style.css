@@ -1286,3 +1286,78 @@ p { max-width: 68ch; }
   .hero__scroll  { display: none; }   /* no room, and nothing to point at */
   .section       { padding-block: var(--s8); }
 }
+
+/* ==========================================================================
+   UTILITIES replacing former inline style attributes.
+   Every style="" in the markup forced `style-src 'unsafe-inline'` in the CSP.
+   Six of them across two pages; moving them here let the policy become
+   `style-src 'self'` with no exception.
+   ========================================================================== */
+.section__head          { margin-bottom: var(--s7); }
+.brand__text--footer    { font-size: 1.6rem; }
+.footer__tag            { color: var(--muted-dim); font-size: var(--fs-sm); margin-top: var(--s2); }
+.footer__muted          { color: var(--muted-dim); font-size: var(--fs-sm); }
+
+/* ==========================================================================
+   LEGAL PAGES (privacy policy, business details)
+   Long-form reading, so the measure is tight and the rhythm is generous.
+   ========================================================================== */
+.legal { padding-top: calc(var(--header-h) + var(--s8)); }
+.legal__wrap { max-width: 78ch; }
+.legal h1 { margin-bottom: var(--s4); }
+.legal h2 {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  margin-top: var(--s8); margin-bottom: var(--s4);
+  padding-top: var(--s5); border-top: 1px solid var(--line);
+}
+.legal h3 { margin-top: var(--s6); margin-bottom: var(--s3); color: var(--oak-hi); }
+.legal p { margin-bottom: var(--s4); color: var(--muted); }
+.legal .lead { color: var(--muted); }
+.legal ul { margin: 0 0 var(--s5) var(--s5); color: var(--muted); }
+.legal li { margin-bottom: var(--s2); }
+.legal strong { color: var(--text); font-weight: 600; }
+.legal a { color: var(--oak-hi); text-decoration: underline; text-underline-offset: 3px; }
+.legal a:hover { color: var(--text); }
+
+.legal__meta { font-size: var(--fs-sm); color: var(--muted-dim); margin-bottom: var(--s7); }
+
+.legal__notice,
+.legal__highlight {
+  border: 1px solid var(--line-strong); border-left-width: 2px;
+  border-radius: var(--radius); padding: var(--s4) var(--s5);
+  margin-bottom: var(--s6); color: var(--muted); font-size: var(--fs-sm);
+}
+.legal__notice   { border-left-color: var(--red); background: rgba(217,36,60,0.06); }
+.legal__highlight{ border-left-color: var(--oak); background: rgba(199,154,107,0.07); }
+
+.legal__table {
+  width: 100%; border-collapse: collapse; margin-bottom: var(--s6);
+  font-size: var(--fs-sm);
+}
+.legal__table th, .legal__table td {
+  text-align: left; vertical-align: top;
+  padding: var(--s3) var(--s4) var(--s3) 0;
+  border-bottom: 1px solid var(--line);
+}
+.legal__table thead th { color: var(--oak); font-weight: 600; letter-spacing: 0.04em; }
+.legal__table tbody th { color: var(--text); font-weight: 500; width: 38%; }
+.legal__table td { color: var(--muted); }
+
+.legal__disclaimer {
+  margin-top: var(--s8); padding-top: var(--s5);
+  border-top: 1px solid var(--line);
+  font-size: 0.8125rem; color: var(--muted-dim); font-style: italic;
+}
+
+/* Wide tables must scroll inside themselves rather than push the page. */
+@media (max-width: 560px) {
+  .legal__table { display: block; overflow-x: auto; }
+  .legal__table tbody th { width: auto; }
+}
+
+/* Privacy line under the booking form */
+.form__privacy {
+  font-size: 0.8125rem; color: var(--muted-dim);
+  margin-top: calc(var(--s3) * -1);
+}
+.form__privacy a { color: var(--oak-hi); text-decoration: underline; text-underline-offset: 2px; }

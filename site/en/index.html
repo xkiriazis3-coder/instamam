@@ -26,10 +26,10 @@
 <meta name="twitter:image:alt" content="Inside Insta.mam Meze Bar in Lagadikia">
 <meta name="theme-color" content="#0F1623">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@200..800&amp;family=GFS+Didot&amp;display=swap">
-<link rel="stylesheet" href="../assets/css/style.css?v=2026082410">
+<link rel="preload" href="/assets/fonts/commissioner-greek.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/gfs-didot-greek.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=1">
+<link rel="stylesheet" href="../assets/css/style.css?v=2026082413">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -100,8 +100,7 @@
 <header class="header">
   <div class="container header__inner">
     <a class="brand" href="/en/" aria-label="Insta.mam Meze Bar — home">
-      <img class="brand__mark" src="../assets/img/logo.png" alt="Insta.mam Meze Bar"
-           onerror="this.style.display='none';this.nextElementSibling.hidden=false">
+      <img class="brand__mark" src="../assets/img/logo.png" alt="Insta.mam Meze Bar">
       <span class="brand__text" hidden><b>Insta<i>.</i>mam</b></span>
     </a>
 
@@ -245,7 +244,7 @@
 <!-- ====================== GALLERY ====================== -->
 <section class="section" id="choros" aria-labelledby="choros-title">
   <div class="container">
-    <div data-reveal style="margin-bottom: var(--s7)">
+    <div class="section__head" data-reveal>
       <p class="eyebrow">The room</p>
       <h2 id="choros-title" data-words>Marble, wood, low light</h2>
     </div>
@@ -315,7 +314,7 @@
 <!-- ====================== VISIT ====================== -->
 <section class="section section--sunk" id="visit" aria-labelledby="visit-title">
   <div class="container">
-    <div data-reveal style="margin-bottom: var(--s7)">
+    <div class="section__head" data-reveal>
       <p class="eyebrow">Find us</p>
       <h2 id="visit-title" data-words>Lagadikia, Thessaloniki</h2>
     </div>
@@ -365,7 +364,7 @@
 <!-- ====================== RESERVE ====================== -->
 <section class="section" id="reserve" aria-labelledby="reserve-title">
   <div class="container">
-    <div data-reveal style="margin-bottom: var(--s7)">
+    <div class="section__head" data-reveal>
       <p class="eyebrow">Booking</p>
       <h2 id="reserve-title" data-words>Book a table</h2>
     </div>
@@ -436,6 +435,11 @@
           <span class="field__help" id="r-note-help">Birthday, high chair, a table outside — anything we should know.</span>
         </div>
 
+        <p class="form__privacy">
+          Your details are used only to hold the table and are deleted afterwards.
+          See the <a href="/en/privacy/">Privacy Policy</a>.
+          Rather they did not leave the EU? <a href="tel:+302393023176">Call us instead</a>.
+        </p>
         <button class="btn btn--primary" type="submit">Send request</button>
         <p class="form__status" role="status" aria-live="polite"></p>
       </form>
@@ -460,8 +464,8 @@
   <div class="container">
     <div class="footer__grid">
       <div>
-        <p class="brand__text" style="font-size:1.6rem"><b>Insta<i>.</i>mam</b></p>
-        <p style="color:var(--muted-dim);font-size:var(--fs-sm);margin-top:var(--s2)">Meze Bar · Lagadikia, Thessaloniki</p>
+        <p class="brand__text brand__text--footer"><b>Insta<i>.</i>mam</b></p>
+        <p class="footer__tag">Meze Bar · Lagadikia, Thessaloniki</p>
         <div class="socials">
           <a href="https://www.instagram.com/instamam_mezebar" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128 80a48 48 0 1 0 48 48 48.05 48.05 0 0 0-48-48Zm0 80a32 32 0 1 1 32-32 32 32 0 0 1-32 32Zm48-136H80a56.06 56.06 0 0 0-56 56v96a56.06 56.06 0 0 0 56 56h96a56.06 56.06 0 0 0 56-56V80a56.06 56.06 0 0 0-56-56Zm40 152a40 40 0 0 1-40 40H80a40 40 0 0 1-40-40V80a40 40 0 0 1 40-40h96a40 40 0 0 1 40 40Zm-24-96a12 12 0 1 1-12-12 12 12 0 0 1 12 12Z"/></svg>
@@ -488,8 +492,10 @@
         <h4>Contact</h4>
         <ul>
           <li><a href="tel:+302393023176">+30 23930 23176</a></li>
-          <li><span style="color:var(--muted-dim);font-size:var(--fs-sm)">⟨STREET⟩, Lagadikia</span></li>
+          <li><span class="footer__muted">⟨STREET⟩, Lagadikia</span></li>
           <li><a href="/" hreflang="el">Ελληνικά</a></li>
+          <li><a href="/en/privacy/">Privacy Policy</a></li>
+          <li><a href="/en/terms/">Business details</a></li>
         </ul>
       </div>
     </div>
@@ -518,25 +524,8 @@
   </div>
 </dialog>
 
-<script>
-  window.INSTAMAM_I18N = {
-    required: 'This field is required',
-    invalid:  'Please check this field',
-    sending:  'Sending…',
-    success:  'Request sent. We will contact you to confirm.',
-    failure:  'Could not send. Please call us on +30 23930 23176.',
-    noEndpoint: 'The form is not connected yet. Please call +30 23930 23176.',
-    menuFail: 'The menu did not load. Please call +30 23930 23176.',
-    menuCats: 'Menu categories',
-    openNow: 'Open now',
-    closedNow: 'Closed',
-    until: 'until',
-    opensAt: 'opens'
-  };
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-<script src="../assets/js/main.js?v=2026082410" defer></script>
-<script src="../assets/js/atmosphere.js?v=2026082410" defer></script>
+<script src="../assets/js/main.js?v=2026082413" defer></script>
+<script src="../assets/js/atmosphere.js?v=2026082413" defer></script>
 <!-- Mobile action bar — see the Greek page for rationale. -->
 <div class="actionbar" aria-label="Quick actions">
   <a class="actionbar__btn" href="tel:+302393023176">
