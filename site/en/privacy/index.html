@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#0F1623">
 <link rel="preload" href="/assets/fonts/commissioner-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=1">
-<link rel="stylesheet" href="/assets/css/style.css?v=2026082413">
+<link rel="stylesheet" href="/assets/css/style.css?v=2026082414">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -40,7 +40,7 @@
       How we collect, use and protect your personal data when you visit this
       site or book a table.
     </p>
-    <p class="legal__meta">Last updated: 24 August 2026</p>
+    <p class="legal__meta">Last updated: 25 August 2026</p>
 
     <div class="legal__notice">
       <strong>Incomplete.</strong> Values in ⟨brackets⟩ must be filled in with
@@ -119,24 +119,30 @@
     <h2>5. Processors</h2>
     <p>We do not sell or rent data. We use:</p>
     <table class="legal__table">
-      <thead><tr><th>Provider</th><th>Role</th><th>Location</th><th>Transfer outside EU</th></tr></thead>
+      <thead><tr><th>Provider</th><th>Role</th><th>Where data lives</th><th>Transfer outside EU</th></tr></thead>
       <tbody>
-        <tr><td>Vercel Inc.</td><td>Website hosting</td><td>US company, EU servers (Frankfurt)</td><td>Standard Contractual Clauses</td></tr>
-        <tr><td>FormSubmit</td><td>Delivers the booking form to our inbox</td><td>United States</td><td>Yes — see section 6</td></tr>
-        <tr><td>Google (Gmail)</td><td>Receives the booking email</td><td>US / EU</td><td>Standard Contractual Clauses</td></tr>
+        <tr>
+          <td>Supabase</td><td>Booking and menu database</td>
+          <td><strong>Frankfurt, Germany (EU)</strong></td>
+          <td><strong>No</strong></td>
+        </tr>
+        <tr>
+          <td>Vercel Inc.</td><td>Website hosting</td>
+          <td>EU servers (Frankfurt)</td>
+          <td>Standard Contractual Clauses</td>
+        </tr>
       </tbody>
     </table>
 
     <h2>6. International transfers</h2>
-    <p>
-      Booking form content is relayed through FormSubmit, based in the United
-      States. Your name and phone number therefore pass through a server
-      outside the European Economic Area.
-    </p>
     <p class="legal__highlight">
-      If you would rather your data did not leave the EU,
-      <strong>book by phone on <a href="tel:+302393023176">+30 23930 23176</a></strong>
-      or send us an Instagram message instead. The form is not the only route.
+      <strong>Booking data does not leave the European Union.</strong> It is
+      stored in a database in Frankfurt, Germany. We no longer use a form
+      relay outside the EU.
+    </p>
+    <p>
+      The site is hosted by Vercel, a US-incorporated company operating EU
+      servers. That relationship is governed by Standard Contractual Clauses.
     </p>
 
     <h2>7. Your rights</h2>
@@ -187,6 +193,6 @@
     <span><a href="/en/">Home</a> · <a href="/en/terms/">Business details</a></span>
   </div>
 </footer>
-<script src="/assets/js/main.js?v=2026082413" defer></script>
+<script src="/assets/js/main.js?v=2026082414" defer></script>
 </body>
 </html>

@@ -232,17 +232,39 @@
     var lang = document.documentElement.lang === 'en' ? 'en' : 'el';
     var t = window.INSTAMAM_I18N || {};
 
-    // cache: 'no-cache' revalidates every time (cheap 304 when unchanged) but
-    // never serves a stale copy. The owner edits this file to change prices —
-    // a cached menu means customers see last month's prices, which is worse
-    // than any latency this costs.
-    fetch(mount.getAttribute('data-src'), { cache: 'no-cache' })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (data) { renderMenu(data, lang, mount, t); })
-      .catch(function () {
-        mount.innerHTML = '<p class="menu__fallback">' +
-          (t.menuFail || 'Menu unavailable.') + '</p>';
-      });
+    // Database first, static file second.
+    //
+    // The JSON file is not dead weight — it is the safety net. A free-tier
+    // Supabase project sleeps after about a week idle, and a sleeping
+    // database must never blank the menu for a customer standing outside.
+    // So: try Postgres, and on ANY failure (paused, offline, slow, error)
+    // fall back to the file that ships with the site. The visitor sees a
+    // menu either way; only staleness differs.
+    var staticSrc = mount.getAttribute('data-src');
+
+    function fromStatic(reason) {
+      return fetch(staticSrc, { cache: 'no-cache' })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (data) {
+          data.source = 'static:' + reason;
+          renderMenu(data, lang, mount, t);
+        })
+        .catch(function () {
+          mount.innerHTML = '<p class="menu__fallback">' +
+            (t.menuFail || 'Menu unavailable.') + '</p>';
+        });
+    }
+
+    if (window.INSTAMAM_DATA) {
+      window.INSTAMAM_DATA.loadMenu()
+        .then(function (data) {
+          if (!data.categories || !data.categories.length) throw new Error('empty');
+          renderMenu(data, lang, mount, t);
+        })
+        .catch(function (e) { fromStatic(e && e.message === 'timeout' ? 'timeout' : 'db-unavailable'); });
+    } else {
+      fromStatic('no-client');
+    }
   }
 
   function renderMenu(data, lang, mount, t) {
@@ -642,10 +664,9 @@
 
       summary.classList.remove('is-visible');
 
-      // No endpoint configured yet → tell the truth instead of faking success.
-      if (!endpoint || endpoint.indexOf('REPLACE') !== -1) {
+      if (!window.INSTAMAM_DATA) {
         status.setAttribute('data-state', 'err');
-        status.textContent = t.noEndpoint || 'Form endpoint not configured yet.';
+        status.textContent = t.noEndpoint || 'Booking is unavailable. Please call us.';
         return;
       }
 
@@ -655,18 +676,27 @@
       status.removeAttribute('data-state');
       status.textContent = '';
 
-      fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      }).then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
+      // Straight into Postgres in Frankfurt. This replaced FormSubmit, which
+      // relayed every booking through a US server — the transfer named in
+      // section 6 of the privacy policy. Booking data no longer leaves the EU.
+      window.INSTAMAM_DATA.createReservation({
+        name: $('#r-name', form).value.trim(),
+        phone: $('#r-phone', form).value.trim(),
+        date: $('#r-date', form).value,
+        time: $('#r-time', form).value,
+        people: $('#r-people', form).value,
+        note: $('#r-note', form).value.trim()
+      }).then(function () {
         form.reset();
         status.setAttribute('data-state', 'ok');
         status.textContent = t.success || 'Request sent.';
-      }).catch(function () {
+      }).catch(function (err) {
         status.setAttribute('data-state', 'err');
-        status.textContent = t.failure || 'Could not send. Please call us.';
+        // The flood brake is the one server error worth explaining; anything
+        // else stays generic so database internals never reach a visitor.
+        status.textContent = (err && err.tooMany)
+          ? (t.tooMany || t.failure)
+          : (t.failure || 'Could not send. Please call us.');
       }).finally(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = original;
@@ -727,15 +757,27 @@
     if (!mounts.length) return;
     var t = window.INSTAMAM_I18N || {};
 
-    fetch(mounts[0].getAttribute('data-src'), { cache: 'no-cache' })   // see menu fetch
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (cfg) {
-        if (!cfg || !cfg.active || !cfg.days) return;
-        var state = compute(cfg);
-        if (!state) return;
-        mounts.forEach(function (m) { paint(m, state, t); });
-      })
-      .catch(function () { /* silent: an unknown state shows nothing */ });
+    // Same database-first, static-fallback shape as the menu. An unknown
+    // state renders nothing at all — silence is always safer here than a
+    // wrong "open now".
+    var staticSrc = mounts[0].getAttribute('data-src');
+
+    function apply(cfg) {
+      if (!cfg || !cfg.active || !cfg.days) return;      // not published yet
+      var state = compute(cfg);
+      if (!state) return;
+      mounts.forEach(function (m) { paint(m, state, t); });
+    }
+
+    var load = window.INSTAMAM_DATA
+      ? window.INSTAMAM_DATA.loadHours().catch(function () {
+          return fetch(staticSrc, { cache: 'no-cache' }).then(function (r) {
+            return r.ok ? r.json() : null;
+          });
+        })
+      : fetch(staticSrc, { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; });
+
+    load.then(apply).catch(function () { /* silent by design */ });
 
     // "now" in the venue's timezone, as minutes-since-midnight + weekday
     function venueNow(tz) {
