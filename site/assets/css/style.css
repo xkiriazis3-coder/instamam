@@ -1359,8 +1359,20 @@ p { max-width: 68ch; }
 .form__privacy {
   font-size: 0.8125rem; color: var(--muted-dim);
   margin-top: calc(var(--s3) * -1);
+  /* The two links here sit inside a sentence, so WCAG 2.5.8 exempts them from
+     the 24x24 target minimum — a link mid-sentence cannot be 44px tall without
+     destroying the sentence. A generous line-height is the honest middle
+     ground: it grows the hit area vertically and costs the prose nothing. */
+  line-height: 2.1;
 }
-.form__privacy a { color: var(--oak-hi); text-decoration: underline; text-underline-offset: 2px; }
+/* Vertical padding on an INLINE element extends the hit area without changing
+   the line box — line-height alone does not, because an inline element's
+   clickable area is its font box. The roomy line-height above stops these
+   padded areas colliding with the lines around them. */
+.form__privacy a {
+  color: var(--oak-hi); text-decoration: underline; text-underline-offset: 2px;
+  padding-block: 7px;
+}
 
 /* ==========================================================================
    DETAILS FROM THE GOOGLE BUSINESS LISTING
@@ -1404,3 +1416,11 @@ p { max-width: 68ch; }
 .grating a:hover { border-color: var(--oak); color: var(--text); background: rgba(199,154,107,0.08); }
 .grating strong { color: var(--oak-hi); font-weight: 600; }
 .grating__stars { display: inline-flex; color: var(--oak-hi); }
+
+/* The hero eyebrow gained a third term ("Καφετέρια") when coffee moved to the
+   front. At 0.34em tracking that pushed it to 335px — one hair over the space
+   available at 375px, so it wrapped and stranded a separator on its own line.
+   Tighten the tracking rather than drop a word: all three terms earn their place. */
+@media (max-width: 480px) {
+  .hero__sub { letter-spacing: 0.2em; }
+}
