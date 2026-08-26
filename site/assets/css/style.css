@@ -1361,3 +1361,46 @@ p { max-width: 68ch; }
   margin-top: calc(var(--s3) * -1);
 }
 .form__privacy a { color: var(--oak-hi); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ==========================================================================
+   DETAILS FROM THE GOOGLE BUSINESS LISTING
+   ========================================================================== */
+
+/* Landline / mobile distinction — the label has to be readable, not decorative,
+   because picking the wrong number is a real cost to the caller. */
+.info__tag {
+  display: inline-block; margin-left: var(--s3);
+  font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted-dim);
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 2px 8px; vertical-align: middle;
+}
+
+/* Dine-in / takeaway / delivery. Delivery in particular was nowhere on the
+   site before, and it is the kind of thing people search for by name. */
+.services { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
+.services li {
+  font-size: var(--fs-sm); color: var(--oak-hi);
+  border: 1px solid rgba(199,154,107,0.35);
+  background: rgba(199,154,107,0.07);
+  border-radius: 999px; padding: 6px 14px;
+}
+
+/* Google rating.
+   Shown as plain linked text with attribution, NOT as aggregateRating in
+   structured data: marking up ratings you did not collect yourself is
+   self-serving review markup under Google's policy and risks a manual
+   action. Displaying it is fine; claiming it in schema is not. */
+.grating { margin-bottom: var(--s5); }
+.grating a {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  min-height: 44px; padding: 0 var(--s4) 0 var(--s3);
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  font-size: var(--fs-sm); color: var(--muted);
+  transition: border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+.grating a:hover { border-color: var(--oak); color: var(--text); background: rgba(199,154,107,0.08); }
+.grating strong { color: var(--oak-hi); font-weight: 600; }
+.grating__stars { display: inline-flex; color: var(--oak-hi); }
